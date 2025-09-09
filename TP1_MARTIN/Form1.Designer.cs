@@ -1,6 +1,6 @@
 ﻿namespace TP1_MARTIN
 {
-    partial class Form1
+    partial class formMenu
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,12 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            components = new System.ComponentModel.Container();
+            bsClients = new BindingSource(components);
+            dgvClients = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)bsClients).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvClients).BeginInit();
+            SuspendLayout();
+            // 
+            // dgvClients
+            // 
+            dgvClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvClients.Location = new Point(86, 46);
+            dgvClients.Name = "dgvClients";
+            dgvClients.Size = new Size(610, 255);
+            dgvClients.TabIndex = 0;
+            // 
+            // formMenu
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(dgvClients);
+            Name = "formMenu";
+            Text = "Menu";
+            Load += formMenu_Load;
+            ((System.ComponentModel.ISupportInitialize)bsClients).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvClients).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private BindingSource bsClients;
+        private DataGridView dgvClients;
     }
 }
