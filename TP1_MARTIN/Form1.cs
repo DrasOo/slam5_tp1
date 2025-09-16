@@ -1,4 +1,5 @@
 using TP1_MARTIN.Classe;
+using TP1_MARTIN.Forms;
 
 namespace TP1_MARTIN
 {
@@ -15,7 +16,17 @@ namespace TP1_MARTIN
             dgvClients.DataSource = bsClients;
             //dgvClients.Columns[0].Visible = false; (marche aps)
             //dgvClients.Columns[0].HeaderText = string.Empty;
+
+
         }
 
+        private void btnCommande_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            formCommande formCommande = new formCommande();
+            formCommande.ShowDialog();
+            ;
+
+        }
     }
 }

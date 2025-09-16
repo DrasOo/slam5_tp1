@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             bsClients = new BindingSource(components);
             dgvClients = new DataGridView();
+            btnCommande = new Button();
             ((System.ComponentModel.ISupportInitialize)bsClients).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvClients).BeginInit();
             SuspendLayout();
@@ -38,16 +39,27 @@
             // dgvClients
             // 
             dgvClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClients.Location = new Point(86, 46);
+            dgvClients.Location = new Point(63, 12);
             dgvClients.Name = "dgvClients";
-            dgvClients.Size = new Size(610, 255);
+            dgvClients.Size = new Size(610, 191);
             dgvClients.TabIndex = 0;
+            // 
+            // btnCommande
+            // 
+            btnCommande.Location = new Point(301, 338);
+            btnCommande.Name = "btnCommande";
+            btnCommande.Size = new Size(106, 44);
+            btnCommande.TabIndex = 1;
+            btnCommande.Text = "Commande";
+            btnCommande.UseVisualStyleBackColor = true;
+            btnCommande.Click += btnCommande_Click;
             // 
             // formMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnCommande);
             Controls.Add(dgvClients);
             Name = "formMenu";
             Text = "Menu";
@@ -61,5 +73,6 @@
 
         private BindingSource bsClients;
         private DataGridView dgvClients;
+        private Button btnCommande;
     }
 }
