@@ -33,9 +33,14 @@ namespace TP1_MARTIN.Forms
             });
             dgvCommandes.DataSource = bsCommandes;
 
-            cbClients.ValueMember = "NUMCLI"; //permet de stocker l'identifiant
-            cbClients.DisplayMember = "NOMCLI";
-            bsClients2.DataSource = Modele.listeClients();
+            cbClients.ValueMember = "NUMCLI";
+            cbClients.DisplayMember = "nomComplet";
+            // nomComplet est la concaténation du nom et prénom issu de la requête suivante
+            bsClients2.DataSource = (Modele.listeClients()).Select(x => new
+            {
+                x.Numcli,
+                nomComplet = x.Nomcli + " " + x.Prenomcli
+            });
             cbClients.DataSource = bsClients2;
         }
 
@@ -62,6 +67,31 @@ namespace TP1_MARTIN.Forms
                 x.NumcliNavigation.Prenomcli
             })
             .OrderBy(x => x.Datecde);
+            dgvCommandes.DataSource = bsCommandes;
+        }
+
+        private void btnAllCommandes_Click(object sender, EventArgs e)
+        {
+            bsCommandes.DataSource = Modele.listeCommandes().Select(x => new
+            {
+                x.Numcde,
+                x.Montantcde,
+                x.Datecde,
+                x.NumcliNavigation.Nomcli,
+                x.NumcliNavigation.Prenomcli
+            });
+        }
+        private void btnLancer_Click(object sender, EventArgs e)
+        {
+            bsCommandes.DataSource = Modele.listeCommandes().Select(x => new
+            {
+                x.Numcde,
+                x.Montantcde,
+                x.Datecde,
+                x.NumcliNavigation.Nomcli,
+                x.NumcliNavigation.Prenomcli
+            })
+            .Where(x => x.Montantcde > Convert.ToInt32(txtSuperieur.Text));
             dgvCommandes.DataSource = bsCommandes;
         }
     }

@@ -34,6 +34,10 @@
             btnMenu = new Button();
             cbClients = new ComboBox();
             bsClients2 = new BindingSource(components);
+            btnAllCommandes = new Button();
+            txtSuperieur = new TextBox();
+            label1 = new Label();
+            btnLancer = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClients2).BeginInit();
@@ -70,11 +74,51 @@
             // 
             bsClients2.CurrentChanged += bsClients2_CurrentChanged;
             // 
+            // btnAllCommandes
+            // 
+            btnAllCommandes.Location = new Point(606, 317);
+            btnAllCommandes.Name = "btnAllCommandes";
+            btnAllCommandes.Size = new Size(157, 24);
+            btnAllCommandes.TabIndex = 5;
+            btnAllCommandes.Text = "Toutes les commandes";
+            btnAllCommandes.UseVisualStyleBackColor = true;
+            btnAllCommandes.Click += btnAllCommandes_Click;
+            // 
+            // txtSuperieur
+            // 
+            txtSuperieur.Location = new Point(606, 375);
+            txtSuperieur.Name = "txtSuperieur";
+            txtSuperieur.Size = new Size(157, 23);
+            txtSuperieur.TabIndex = 6;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(632, 357);
+            label1.Name = "label1";
+            label1.Size = new Size(105, 15);
+            label1.TabIndex = 7;
+            label1.Text = "Montant supérieur";
+            // 
+            // btnLancer
+            // 
+            btnLancer.Location = new Point(632, 404);
+            btnLancer.Name = "btnLancer";
+            btnLancer.Size = new Size(111, 24);
+            btnLancer.TabIndex = 8;
+            btnLancer.Text = "Lancer";
+            btnLancer.UseVisualStyleBackColor = true;
+            btnLancer.Click += btnLancer_Click;
+            // 
             // formCommande
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnLancer);
+            Controls.Add(label1);
+            Controls.Add(txtSuperieur);
+            Controls.Add(btnAllCommandes);
             Controls.Add(cbClients);
             Controls.Add(btnMenu);
             Controls.Add(dgvCommandes);
@@ -85,6 +129,7 @@
             ((System.ComponentModel.ISupportInitialize)bsCommandes).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsClients2).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -94,5 +139,9 @@
         private Button btnMenu;
         private ComboBox cbClients;
         private BindingSource bsClients2;
+        private Button btnAllCommandes;
+        private TextBox txtSuperieur;
+        private Label label1;
+        private Button btnLancer;
     }
 }
