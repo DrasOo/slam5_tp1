@@ -24,6 +24,8 @@ public partial class BdPartitionsContext : DbContext
 
     public virtual DbSet<Partition> Partitions { get; set; }
 
+    public virtual DbSet<Style> Styles { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseMySql("server=127.0.0.1;port=3306;user=root;database=bd_partitions", Microsoft.EntityFrameworkCore.ServerVersion.Parse("9.1.0-mysql"));
 
@@ -64,6 +66,9 @@ public partial class BdPartitionsContext : DbContext
             entity.Property(e => e.Prenomcli)
                 .HasMaxLength(128)
                 .HasColumnName("PRENOMCLI");
+            entity.Property(e => e.Tel)
+                .HasMaxLength(12)
+                .HasColumnName("TEL");
         });
 
         modelBuilder.Entity<Commande>(entity =>
@@ -113,11 +118,21 @@ public partial class BdPartitionsContext : DbContext
 
             entity.ToTable("partitions");
 
+            entity.HasIndex(e => e.Numstyle, "NUMSTYLE");
+
             entity.Property(e => e.Numpart).HasColumnName("NUMPART");
             entity.Property(e => e.Libpart)
                 .HasMaxLength(128)
                 .HasColumnName("LIBPART");
+            entity.Property(e => e.Numstyle)
+                .HasDefaultValueSql("'1'")
+                .HasColumnName("NUMSTYLE");
             entity.Property(e => e.Prixpart).HasColumnName("PRIXPART");
+
+            entity.HasOne(d => d.NumstyleNavigation).WithMany(p => p.Partitions)
+                .HasForeignKey(d => d.Numstyle)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("partitions_ibfk_1");
 
             entity.HasMany(d => d.Numauts).WithMany(p => p.Numparts)
                 .UsingEntity<Dictionary<string, object>>(
@@ -140,6 +155,18 @@ public partial class BdPartitionsContext : DbContext
                         j.IndexerProperty<int>("Numpart").HasColumnName("NUMPART");
                         j.IndexerProperty<int>("Numaut").HasColumnName("NUMAUT");
                     });
+        });
+
+        modelBuilder.Entity<Style>(entity =>
+        {
+            entity.HasKey(e => e.Numstyle).HasName("PRIMARY");
+
+            entity.ToTable("style");
+
+            entity.Property(e => e.Numstyle).HasColumnName("NUMSTYLE");
+            entity.Property(e => e.Libstyle)
+                .HasMaxLength(255)
+                .HasColumnName("LIBSTYLE");
         });
 
         OnModelCreatingPartial(modelBuilder);
