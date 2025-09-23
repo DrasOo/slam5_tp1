@@ -48,5 +48,73 @@ namespace TP1_MARTIN.Forms
             cbListeClients.DataSource = bsClients3;
 
         }
+
+        private void txtMontant_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && e.KeyChar != Convert.ToChar(Keys.Back))
+            {
+                MessageBox.Show("Erreur, vous devez saisir des entiers", "Erreur", MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+                e.Handled = true; // efface le dernier caractère saisi
+            }
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            DateTime selectedDate = dtpDate.Value;
+
+            int montant;
+            if(!int.TryParse(txtMontant.Text, out montant))
+            {
+                MessageBox.Show("Veuillez entrer un montant valide (nombre entier).", "Montant invalide", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (cbListeClients.SelectedValue != null)
+            {
+                int numCli = Convert.ToInt32(cbListeClients.SelectedValue);
+
+                bool isSuccess = Modele.AjoutCommande(montant, selectedDate, numCli);
+
+                if (isSuccess)
+                {
+                    MessageBox.Show("Commande ajoutée avec succès !", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    RafraichirDataGridView();  
+                    RéinitialiserChamps();
+                }
+                else
+                {
+                    MessageBox.Show("Échec de l'ajout de la commande.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un client.", "Client non sélectionné", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void RafraichirDataGridView()
+        {
+            var commandes = Modele.listeCommandes().Select(x => new
+            {
+                x.Numcde,
+                x.Montantcde,
+                x.Datecde,
+                x.NumcliNavigation.Nomcli,
+                x.NumcliNavigation.Prenomcli
+            }).ToList();
+
+            bsCommandes2.DataSource = commandes;
+            dgvGestionCommandes.DataSource = bsCommandes2;
+        }
+
+        private void RéinitialiserChamps()
+        {
+            dtpDate.Value = DateTime.Now;
+            cbListeClients.SelectedIndex = -1;
+            txtMontant.Text = "";
+        }
+
     }
 }

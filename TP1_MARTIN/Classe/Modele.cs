@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using TP1_MARTIN.Entities;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TP1_MARTIN.Classe
 {
@@ -28,6 +30,28 @@ namespace TP1_MARTIN.Classe
             List<Commande> lesCommandes = monModel.Commandes.Where(p => p.Numcli ==
            idClient).Include(p => p.NumcliNavigation).ToList();
             return lesCommandes;
+        }
+        public static bool AjoutCommande(int montant, DateTime dateC, int idClient)
+        {
+            Commande maCommande;
+            bool vretour = true;
+            try
+            {
+                maCommande = new Commande();
+                maCommande.Montantcde = montant; // mise à jour des propriétés
+                maCommande.Datecde = DateOnly.FromDateTime(dateC.Date);
+
+
+                maCommande.Numcli = idClient;
+                // ajout de l’objet : correspond à un insert
+                monModel.Commandes.Add(maCommande); // correspond à un INSERT INTO
+                monModel.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+            }
+            return vretour;
         }
     }
 }

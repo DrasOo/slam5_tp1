@@ -35,7 +35,7 @@
             cbListeClients = new ComboBox();
             label2 = new Label();
             label3 = new Label();
-            button1 = new Button();
+            btnOk = new Button();
             btnAnnule = new Button();
             btnFermer = new Button();
             dgvGestionCommandes = new DataGridView();
@@ -52,6 +52,7 @@
             txtMontant.Name = "txtMontant";
             txtMontant.Size = new Size(199, 23);
             txtMontant.TabIndex = 0;
+            txtMontant.KeyPress += txtMontant_KeyPress;
             // 
             // label1
             // 
@@ -96,14 +97,15 @@
             label3.TabIndex = 5;
             label3.Text = "Liste des clients";
             // 
-            // button1
+            // btnOk
             // 
-            button1.Location = new Point(93, 109);
-            button1.Name = "button1";
-            button1.Size = new Size(173, 52);
-            button1.TabIndex = 6;
-            button1.Text = "Ok";
-            button1.UseVisualStyleBackColor = true;
+            btnOk.Location = new Point(93, 109);
+            btnOk.Name = "btnOk";
+            btnOk.Size = new Size(173, 52);
+            btnOk.TabIndex = 6;
+            btnOk.Text = "Ok";
+            btnOk.UseVisualStyleBackColor = true;
+            btnOk.Click += btnOk_Click;
             // 
             // btnAnnule
             // 
@@ -143,7 +145,7 @@
             Controls.Add(dgvGestionCommandes);
             Controls.Add(btnFermer);
             Controls.Add(btnAnnule);
-            Controls.Add(button1);
+            Controls.Add(btnOk);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(cbListeClients);
@@ -168,7 +170,7 @@
         private ComboBox cbListeClients;
         private Label label2;
         private Label label3;
-        private Button button1;
+        private Button btnOk;
         private Button btnAnnule;
         private Button btnFermer;
         private DataGridView dgvGestionCommandes;

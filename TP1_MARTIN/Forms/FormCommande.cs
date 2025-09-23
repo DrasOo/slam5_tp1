@@ -100,7 +100,5 @@ namespace TP1_MARTIN.Forms
             formGestionCommandes formGestionCommandes = new formGestionCommandes();
             formGestionCommandes.ShowDialog();
         }
-
-        
     }
 }
