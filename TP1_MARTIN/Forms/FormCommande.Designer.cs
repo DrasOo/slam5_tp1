@@ -51,7 +51,7 @@
             dgvCommandes.Name = "dgvCommandes";
             dgvCommandes.Size = new Size(687, 191);
             dgvCommandes.TabIndex = 2;
-            // 
+            //
             // btnMenu
             // 
             btnMenu.Location = new Point(283, 375);

@@ -93,12 +93,14 @@ namespace TP1_MARTIN.Forms
             })
             .Where(x => x.Montantcde > Convert.ToInt32(txtSuperieur.Text));
             dgvCommandes.DataSource = bsCommandes;
-        } 
+        }
         private void btnAjouter_Click(object sender, EventArgs e)
         {
             this.Hide();
             formGestionCommandes formGestionCommandes = new formGestionCommandes();
             formGestionCommandes.ShowDialog();
         }
-    } 
+
+        
+    }
 }

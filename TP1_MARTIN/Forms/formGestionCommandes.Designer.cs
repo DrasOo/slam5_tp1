@@ -28,12 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             txtMontant = new TextBox();
             label1 = new Label();
             dtpDate = new DateTimePicker();
             cbListeClients = new ComboBox();
             label2 = new Label();
             label3 = new Label();
+            button1 = new Button();
+            btnAnnule = new Button();
+            btnFermer = new Button();
+            dgvGestionCommandes = new DataGridView();
+            bsCommandes2 = new BindingSource(components);
+            bsClients3 = new BindingSource(components);
+            ((System.ComponentModel.ISupportInitialize)dgvGestionCommandes).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsCommandes2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsClients3).BeginInit();
             SuspendLayout();
             // 
             // txtMontant
@@ -61,6 +71,7 @@
             // 
             // cbListeClients
             // 
+            cbListeClients.DropDownStyle = ComboBoxStyle.DropDownList;
             cbListeClients.FormattingEnabled = true;
             cbListeClients.Location = new Point(78, 39);
             cbListeClients.Name = "cbListeClients";
@@ -85,11 +96,54 @@
             label3.TabIndex = 5;
             label3.Text = "Liste des clients";
             // 
+            // button1
+            // 
+            button1.Location = new Point(93, 109);
+            button1.Name = "button1";
+            button1.Size = new Size(173, 52);
+            button1.TabIndex = 6;
+            button1.Text = "Ok";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // btnAnnule
+            // 
+            btnAnnule.Location = new Point(317, 109);
+            btnAnnule.Name = "btnAnnule";
+            btnAnnule.Size = new Size(173, 52);
+            btnAnnule.TabIndex = 7;
+            btnAnnule.Text = "Annuler";
+            btnAnnule.UseVisualStyleBackColor = true;
+            // 
+            // btnFermer
+            // 
+            btnFermer.Location = new Point(545, 109);
+            btnFermer.Name = "btnFermer";
+            btnFermer.Size = new Size(173, 52);
+            btnFermer.TabIndex = 8;
+            btnFermer.Text = "Fermer";
+            btnFermer.UseVisualStyleBackColor = true;
+            btnFermer.Click += btnFermer_Click;
+            // 
+            // dgvGestionCommandes
+            // 
+            dgvGestionCommandes.AllowUserToAddRows = false;
+            dgvGestionCommandes.AllowUserToDeleteRows = false;
+            dgvGestionCommandes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvGestionCommandes.Location = new Point(93, 244);
+            dgvGestionCommandes.Name = "dgvGestionCommandes";
+            dgvGestionCommandes.ReadOnly = true;
+            dgvGestionCommandes.Size = new Size(625, 150);
+            dgvGestionCommandes.TabIndex = 9;
+            // 
             // formGestionCommandes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(dgvGestionCommandes);
+            Controls.Add(btnFermer);
+            Controls.Add(btnAnnule);
+            Controls.Add(button1);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(cbListeClients);
@@ -98,6 +152,10 @@
             Controls.Add(txtMontant);
             Name = "formGestionCommandes";
             Text = "formGestionCommandes";
+            Load += formGestionCommandes_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvGestionCommandes).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsCommandes2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsClients3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -110,5 +168,11 @@
         private ComboBox cbListeClients;
         private Label label2;
         private Label label3;
+        private Button button1;
+        private Button btnAnnule;
+        private Button btnFermer;
+        private DataGridView dgvGestionCommandes;
+        private BindingSource bsCommandes2;
+        private BindingSource bsClients3;
     }
 }
