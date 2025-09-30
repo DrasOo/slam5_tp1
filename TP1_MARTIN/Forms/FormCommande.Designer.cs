@@ -40,6 +40,7 @@
             btnLancer = new Button();
             btnAjouter = new Button();
             btnModifier = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClients2).BeginInit();
@@ -53,12 +54,9 @@
             dgvCommandes.Size = new Size(687, 191);
             dgvCommandes.TabIndex = 2;
             // 
-            // bsCommandes
-            // 
-            // 
             // btnMenu
             // 
-            btnMenu.Location = new Point(220, 375);
+            btnMenu.Location = new Point(267, 357);
             btnMenu.Name = "btnMenu";
             btnMenu.Size = new Size(187, 52);
             btnMenu.TabIndex = 3;
@@ -117,9 +115,9 @@
             // 
             // btnAjouter
             // 
-            btnAjouter.Location = new Point(371, 277);
+            btnAjouter.Location = new Point(459, 277);
             btnAjouter.Name = "btnAjouter";
-            btnAjouter.Size = new Size(187, 52);
+            btnAjouter.Size = new Size(118, 45);
             btnAjouter.TabIndex = 9;
             btnAjouter.Text = "Ajouter";
             btnAjouter.UseVisualStyleBackColor = true;
@@ -127,19 +125,29 @@
             // 
             // btnModifier
             // 
-            btnModifier.Location = new Point(76, 277);
+            btnModifier.Location = new Point(276, 277);
             btnModifier.Name = "btnModifier";
-            btnModifier.Size = new Size(187, 52);
+            btnModifier.Size = new Size(118, 45);
             btnModifier.TabIndex = 10;
             btnModifier.Text = "Modifier";
             btnModifier.UseVisualStyleBackColor = true;
             btnModifier.Click += btnModifier_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(85, 277);
+            button1.Name = "button1";
+            button1.Size = new Size(118, 45);
+            button1.TabIndex = 11;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
             // 
             // formCommande
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button1);
             Controls.Add(btnModifier);
             Controls.Add(btnAjouter);
             Controls.Add(btnLancer);
@@ -172,5 +180,6 @@
         private Button btnLancer;
         private Button btnAjouter;
         private Button btnModifier;
+        private Button button1;
     }
 }

@@ -162,15 +162,12 @@ namespace TP1_MARTIN.Forms
 
             DateTime dateC = dtpDate.Value;
             int idClient = Convert.ToInt32(cbListeClients.SelectedValue);
-
             bool isSuccess = Modele.ModifierCommande(idCommandeSelectionnee, montant, dateC, idClient);
-
             if (isSuccess)
             {
                 MessageBox.Show("Commande modifiée avec succès !", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 RafraichirDataGridView();
                 RéinitialiserChamps();
-                ModifierAjouter = true; // on repasse en mode ajout si tu veux
             }
             else
             {
