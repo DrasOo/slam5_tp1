@@ -4,18 +4,32 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TP1_MARTIN.Classe;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TP1_MARTIN.Forms
 {
     public partial class formGestionCommandes : Form
     {
-        public formGestionCommandes()
+        bool ModifierAjouter; // false = modifier, true = ajouter
+        int idCommandeSelectionnee = 0; // pour stocker l'id de la commande sélectionnée dans le datagridview
+        public formGestionCommandes(bool modifierAjouter = false)
         {
             InitializeComponent();
+            if(modifierAjouter)
+            {
+                ModifierAjouter = true;
+                lblModifier.Text = "Ajouter";
+            }
+            else
+            {
+                ModifierAjouter = false;
+                lblModifier.Text = "Modifier";
+            }
         }
 
         private void btnFermer_Click(object sender, EventArgs e)
@@ -61,37 +75,19 @@ namespace TP1_MARTIN.Forms
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            DateTime selectedDate = dtpDate.Value;
-
-            int montant;
-            if(!int.TryParse(txtMontant.Text, out montant))
+            if(ModifierAjouter == true)
             {
-                MessageBox.Show("Veuillez entrer un montant valide (nombre entier).", "Montant invalide", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                AjoutCommande();
             }
-
-            if (cbListeClients.SelectedValue != null)
+            else if(ModifierAjouter == false)
             {
-                int numCli = Convert.ToInt32(cbListeClients.SelectedValue);
-
-                bool isSuccess = Modele.AjoutCommande(montant, selectedDate, numCli);
-
-                if (isSuccess)
-                {
-                    MessageBox.Show("Commande ajoutée avec succès !", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    RafraichirDataGridView();  
-                    RéinitialiserChamps();
-                }
-                else
-                {
-                    MessageBox.Show("Échec de l'ajout de la commande.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                ModifierCommande(); //int idCde, int montant, DateTime dateC, int idClient
             }
             else
             {
-                MessageBox.Show("Veuillez sélectionner un client.", "Client non sélectionné", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Erreur inattendue", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
         private void RafraichirDataGridView()
@@ -115,6 +111,72 @@ namespace TP1_MARTIN.Forms
             cbListeClients.SelectedIndex = -1;
             txtMontant.Text = "";
         }
+        private void AjoutCommande()
+        {
+            DateTime selectedDate = dtpDate.Value;
 
+            int montant;
+            if (!int.TryParse(txtMontant.Text, out montant))
+            {
+                MessageBox.Show("Veuillez entrer un montant valide (nombre entier).", "Montant invalide", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (cbListeClients.SelectedValue != null)
+            {
+                int numCli = Convert.ToInt32(cbListeClients.SelectedValue);
+
+                bool isSuccess = Modele.AjoutCommande(montant, selectedDate, numCli);
+
+                if (isSuccess)
+                {
+                    MessageBox.Show("Commande ajoutée avec succès !", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    RafraichirDataGridView();
+                    RéinitialiserChamps();
+                }
+                else
+                {
+                    MessageBox.Show("Échec de l'ajout de la commande.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un client.", "Client non sélectionné", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        private void ModifierCommande()
+        {
+            int idCommandeSelectionnee = Convert.ToInt32(cbListeClients.SelectedValue);
+            if (idCommandeSelectionnee == 0)
+            {
+                MessageBox.Show("Veuillez sélectionner une commande dans la liste.", "Aucune sélection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            int montant;
+            if (!int.TryParse(txtMontant.Text, out montant))
+            {
+                MessageBox.Show("Veuillez entrer un montant valide (nombre entier).", "Montant invalide", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DateTime dateC = dtpDate.Value;
+            int idClient = Convert.ToInt32(cbListeClients.SelectedValue);
+
+            bool isSuccess = Modele.ModifierCommande(idCommandeSelectionnee, montant, dateC, idClient);
+
+            if (isSuccess)
+            {
+                MessageBox.Show("Commande modifiée avec succès !", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                RafraichirDataGridView();
+                RéinitialiserChamps();
+                ModifierAjouter = true; // on repasse en mode ajout si tu veux
+            }
+            else
+            {
+                MessageBox.Show("La modification a échoué.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
     }
 }

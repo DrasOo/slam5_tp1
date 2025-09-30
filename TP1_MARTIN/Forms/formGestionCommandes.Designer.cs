@@ -41,6 +41,7 @@
             dgvGestionCommandes = new DataGridView();
             bsCommandes2 = new BindingSource(components);
             bsClients3 = new BindingSource(components);
+            lblModifier = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvGestionCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsCommandes2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClients3).BeginInit();
@@ -137,11 +138,20 @@
             dgvGestionCommandes.Size = new Size(625, 150);
             dgvGestionCommandes.TabIndex = 9;
             // 
+            // lblModifier
+            // 
+            lblModifier.AutoSize = true;
+            lblModifier.Location = new Point(386, 204);
+            lblModifier.Name = "lblModifier";
+            lblModifier.Size = new Size(0, 15);
+            lblModifier.TabIndex = 10;
+            // 
             // formGestionCommandes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblModifier);
             Controls.Add(dgvGestionCommandes);
             Controls.Add(btnFermer);
             Controls.Add(btnAnnule);
@@ -176,5 +186,6 @@
         private DataGridView dgvGestionCommandes;
         private BindingSource bsCommandes2;
         private BindingSource bsClients3;
+        private Label lblModifier;
     }
 }

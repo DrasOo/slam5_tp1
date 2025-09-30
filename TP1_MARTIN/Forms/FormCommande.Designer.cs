@@ -39,6 +39,7 @@
             label1 = new Label();
             btnLancer = new Button();
             btnAjouter = new Button();
+            btnModifier = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsCommandes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClients2).BeginInit();
@@ -51,10 +52,13 @@
             dgvCommandes.Name = "dgvCommandes";
             dgvCommandes.Size = new Size(687, 191);
             dgvCommandes.TabIndex = 2;
-            //
+            // 
+            // bsCommandes
+            // 
+            // 
             // btnMenu
             // 
-            btnMenu.Location = new Point(283, 375);
+            btnMenu.Location = new Point(220, 375);
             btnMenu.Name = "btnMenu";
             btnMenu.Size = new Size(187, 52);
             btnMenu.TabIndex = 3;
@@ -113,7 +117,7 @@
             // 
             // btnAjouter
             // 
-            btnAjouter.Location = new Point(283, 277);
+            btnAjouter.Location = new Point(371, 277);
             btnAjouter.Name = "btnAjouter";
             btnAjouter.Size = new Size(187, 52);
             btnAjouter.TabIndex = 9;
@@ -121,11 +125,22 @@
             btnAjouter.UseVisualStyleBackColor = true;
             btnAjouter.Click += btnAjouter_Click;
             // 
+            // btnModifier
+            // 
+            btnModifier.Location = new Point(76, 277);
+            btnModifier.Name = "btnModifier";
+            btnModifier.Size = new Size(187, 52);
+            btnModifier.TabIndex = 10;
+            btnModifier.Text = "Modifier";
+            btnModifier.UseVisualStyleBackColor = true;
+            btnModifier.Click += btnModifier_Click;
+            // 
             // formCommande
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnModifier);
             Controls.Add(btnAjouter);
             Controls.Add(btnLancer);
             Controls.Add(label1);
@@ -156,5 +171,6 @@
         private Label label1;
         private Button btnLancer;
         private Button btnAjouter;
+        private Button btnModifier;
     }
 }

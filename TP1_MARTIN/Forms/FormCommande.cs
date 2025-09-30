@@ -18,7 +18,6 @@ namespace TP1_MARTIN.Forms
         {
             InitializeComponent();
 
-
         }
 
         private void FormCommande_Load(object sender, EventArgs e)
@@ -42,6 +41,15 @@ namespace TP1_MARTIN.Forms
                 nomComplet = x.Nomcli + " " + x.Prenomcli
             });
             cbClients.DataSource = bsClients2;
+
+            bsCommandes.DataSource = Modele.listeCommandes().Select(x => new
+            {
+                x.Numcde,
+                x.Montantcde,
+                x.Datecde,
+                x.NumcliNavigation.Nomcli,
+                x.NumcliNavigation.Prenomcli
+            });
         }
 
         private void btnMenu_Click(object sender, EventArgs e)
@@ -97,8 +105,21 @@ namespace TP1_MARTIN.Forms
         private void btnAjouter_Click(object sender, EventArgs e)
         {
             this.Hide();
-            formGestionCommandes formGestionCommandes = new formGestionCommandes();
+            formGestionCommandes formGestionCommandes = new formGestionCommandes(true);
             formGestionCommandes.ShowDialog();
         }
+
+        private void btnModifier_Click(object sender, EventArgs e)
+        {
+            System.Type type = bsCommandes.Current.GetType();
+            int idCommande = (int)type.GetProperty("Numcde").GetValue(bsCommandes.Current, null);
+            this.Hide();
+            formGestionCommandes formGestionCommandes = new formGestionCommandes(false);
+            formGestionCommandes.ShowDialog();
+
+
+        }
+
+        
     }
 }

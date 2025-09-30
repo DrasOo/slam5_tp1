@@ -53,5 +53,36 @@ namespace TP1_MARTIN.Classe
             }
             return vretour;
         }
+        public static Commande RecupererCommande(int idCommande)
+        {
+            Commande uneCommande = new Commande();
+            try
+            {
+                uneCommande = monModel.Commandes.Include(c => c.Numparts).First(x =>
+               x.Numcde == idCommande);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+            return uneCommande;
+        }
+        public static bool ModifierCommande(int idCde, int montant, DateTime dateC, int idClient)
+        {
+            bool vretour = true;
+            try
+            {
+                Commande maCommande = monModel.Commandes.First(x => x.Numcde == idCde);
+                maCommande.Montantcde = montant; // mise à jour des propriétés
+                maCommande.Datecde = DateOnly.FromDateTime(dateC.Date);
+                maCommande.Numcli = idClient;
+                monModel.SaveChanges(); // correspond à un UPDATE
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+            }
+            return vretour;
+        }
     }
 }
